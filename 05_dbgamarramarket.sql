@@ -1,4 +1,4 @@
-USE dbgamarramarket;
+USE dbGamarraMarket;
 SELECT DATABASE() AS '05_Actividad_BD1';
 
 -- Actualizacion de data en tabla --
@@ -100,19 +100,18 @@ VALUES
 	(4, 5, 3);
 SELECT * FROM VENTA_DETALLE;
 
-/* Actualizar el número de celular de Mario Mayo por el número 922881101 */
+/* cambiar su apellidos y su gmail*/
 UPDATE CLIENTE
-SET celular = '922881101' WHERE id = 10;
+SET apellidos = 'Mendez Vera',
+	email = 'alicia.mendez@yahoo.es'
+    WHERE nombres = 'Alicia' AND apellidos = 'García  Campos';
+    
+SELECT * FROM CLIENTE;
 
-/* El cliente con DNI 53298147 ya cuenta con número de celular es: 977226604*/
-UPDATE CLIENTE
-set celular = 977226604 
-WHERE numero_documento = "53298147";
-
-/*Eliminar lógicamente los clientes cuyo DNI son: 11453265, 74142585 y 49985471*/
+/*Eliminar lógicamente al cliente cuyo DNI es: 11453265*/
 UPDATE CLIENTE
 SET activo = 0
-WHERE numero_documento IN ("11453265", "74142585", "49985471");
+WHERE numero_documento IN ("15487922");
 
 /*Los clientes cuyos DNI son: 87952514, 55869321, 74142585 han perdido su celuLar por lo tanto tienen que estar en blanco*/
 UPDATE CLIENTE
@@ -150,20 +149,24 @@ WHERE descripcion = "Corbata";
 SELECT * FROM PRENDA;
 
 /*Eliminar físicamente las prendas: Camisa manga corta y Camisa Sport*/
-DELETE FROM Prenda
+DELETE FROM PRENDA
 WHERE descripcion IN ('Camisa manga corta', 'Camisa Sport');
 
 /*Eliminar físicamente a la vendedora Marcela Napaico Cama*/
-DELETE FROM Vendedor
+DELETE FROM VENDEDOR
 WHERE nombres = "Marcela" AND apellidos = "Napaico Cama";
 
+SELECT * FROM VENDEDOR;
 /*Elimina físicamente los clientes cuyos documentos son 47142536 y 77889955*/
-DELETE FROM Cliente
+DELETE FROM CLIENTE
 WHERE numero_documento IN ('47142536', '77889955');
 
 /*Elimina todos los clientes nacidos en el año 1980*/
 DELETE FROM CLIENTE
 WHERE EXTRACT(YEAR FROM fecha_nacimiento) = 1980;
+
+DELETE FROM CLIENTE
+WHERE nombres= 'Juana' AND apellidos= 'Avila Chumpitaz';
 
 /* SEGUNDA MANERA
 DELETE FROM Cliente
@@ -174,3 +177,6 @@ WHERE numero_documento IN (
 ); */
 
 SELECT * FROM CLIENTE;
+
+/*sentencia para deshabilitar el modo seguro*/
+SET SQL_SAFE_UPDATES=0;
